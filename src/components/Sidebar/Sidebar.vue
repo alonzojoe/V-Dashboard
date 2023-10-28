@@ -49,7 +49,7 @@
             ></path>
           </svg>
         </span>
-        <span class="app-brand-text demo menu-text fw-bold">Vuexy</span>
+        <span class="app-brand-text demo menu-text fw-bold">V-Dash</span>
       </a>
 
       <!-- <a
@@ -61,8 +61,11 @@
             ></i>
             <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
           </a> -->
-      <a href="" class="layout-menu-toggle menu-link text-large ms-auto mb-2">
-        <div class="demo-vertical-spacing">
+      <a
+        href="javascript:void(0);"
+        class="layout-menu-toggle menu-link text-large ms-auto mb-2"
+      >
+        <div class="demo-vertical-spacing btn-switch">
           <div class="has-error">
             <label class="switch">
               <input
@@ -78,6 +81,10 @@
             </label>
           </div>
         </div>
+        <i
+          @click="hideExpanded"
+          class="ti ti-x d-block d-xl-none ti-sm align-middle btn-x"
+        ></i>
       </a>
     </div>
 
@@ -1331,7 +1338,7 @@
 import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
-  setup() {
+  setup({ emit }) {
     const hoverNav = (type) => {
       const htmlTag = document.querySelector("html");
       if (type == 1) {
@@ -1346,7 +1353,7 @@ export default defineComponent({
     watch(() => {
       isLock.value;
       const htmlTag = document.querySelector("html");
-      if (isLock.value == false) {
+      if (!isLock.value) {
         htmlTag.classList.remove("layout-menu");
         htmlTag.classList.add("layout-menu-collapsed");
         htmlTag.classList.remove("layout-menu-hover");
@@ -1356,9 +1363,42 @@ export default defineComponent({
       }
     });
 
-    return { hoverNav, isLock };
+    const hideExpanded = () => {
+      const htmlTag = document.querySelector("html");
+      htmlTag.classList.remove("layout-menu-expanded");
+      emit("close-expanded", false);
+    };
+
+    return { hoverNav, isLock, hideExpanded };
   },
 });
 </script>
 
-<style></style>
+<style scoped>
+.switch {
+  padding: 0;
+  margin-right: 0;
+}
+
+.switch-toggle-slider {
+  border: 0.1rem solid #7367f0 !important;
+}
+
+.switch-off {
+  color: #fff;
+}
+
+.btn-x {
+  display: none;
+}
+
+@media (max-width: 1199.98px) {
+  .btn-x {
+    display: block;
+  }
+
+  .btn-switch {
+    display: none;
+  }
+}
+</style>

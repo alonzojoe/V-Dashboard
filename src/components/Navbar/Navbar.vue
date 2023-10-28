@@ -1,12 +1,16 @@
 <template>
   <nav
-    class="m-0 w-auto rounded-0 layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+    class="m-0 rounded-0 w-auto layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme container-fluid"
     id="layout-navbar"
   >
     <div
       class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
     >
-      <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+      <a
+        class="nav-item nav-link px-0 me-xl-4"
+        @click="toggleExpend"
+        href="javascript:void(0)"
+      >
         <i class="ti ti-menu-2 ti-sm"></i>
       </a>
     </div>
@@ -24,7 +28,7 @@
           >
             <i class="ti ti-search ti-md me-2"></i>
             <span class="d-none d-md-inline-block text-muted"
-              >Search (Ctrl+/)</span
+              >Search (Ctrl+/) {{ isExpanded }}</span
             >
           </a>
         </div>
@@ -695,11 +699,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const isExpanded = ref(false);
+
+    const toggleExpend = () => {
+      isExpanded.value = !isExpanded.value ? true : false;
+    };
+
+    // layout-menu-expanded
+    watch(() => {
+      isExpanded.value;
+      const htmlTag = document.querySelector("html");
+      if (!isExpanded.value) {
+        htmlTag.classList.remove("layout-menu-expanded");
+      } else {
+        htmlTag.classList.add("layout-menu-expanded");
+      }
+    });
+
+    return { isExpanded, toggleExpend };
   },
 });
 </script>
