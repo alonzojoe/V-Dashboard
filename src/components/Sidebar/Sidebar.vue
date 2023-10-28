@@ -1,16 +1,17 @@
 <template>
   <aside
     id="layout-menu"
-    class="layout-menu menu-vertical menu bg-menu-theme"
-    data-bg-class="bg-menu-theme"
+    class="layout-menu menu-vertical bg-menu-theme"
     style="
       touch-action: none;
       user-select: none;
       -webkit-user-drag: none;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     "
+    @mouseover="hoverNav(1)"
+    @mouseout="hoverNav(2)"
   >
-    <div class="app-brand demo" style="backround: red !important">
+    <div class="app-brand demo py-3 d-flex align-items-center">
       <a href="index.html" class="app-brand-link">
         <span class="app-brand-logo demo">
           <svg
@@ -51,18 +52,38 @@
         <span class="app-brand-text demo menu-text fw-bold">Vuexy</span>
       </a>
 
-      <a
-        href="javascript:void(0);"
-        class="layout-menu-toggle menu-link text-large ms-auto"
-      >
-        <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"></i>
-        <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+      <!-- <a
+            href="javascript:void(0);"
+            class="layout-menu-toggle menu-link text-large ms-auto"
+          >
+            <i
+              class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle"
+            ></i>
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+          </a> -->
+      <a href="" class="layout-menu-toggle menu-link text-large ms-auto mb-2">
+        <div class="demo-vertical-spacing">
+          <div class="has-error">
+            <label class="switch">
+              <input
+                type="checkbox"
+                class="switch-input switch-input"
+                v-model="isLock"
+              />
+              <span class="switch-toggle-slider">
+                <span class="switch-on"></span>
+                <span class="switch-off"></span>
+              </span>
+              <span class="switch-label"></span>
+            </label>
+          </div>
+        </div>
       </a>
     </div>
 
     <div class="menu-inner-shadow"></div>
 
-    <ul class="menu-inner py-1 ps ps--active-y">
+    <ul class="menu-inner py-1">
       <!-- Dashboards -->
       <li class="menu-item active open">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -204,7 +225,7 @@
               </li>
               <li class="menu-item">
                 <a href="app-ecommerce-category-list.html" class="menu-link">
-                  <div data-i18n="Category list">Category list</div>
+                  <div data-i18n="Category list">Category List</div>
                 </a>
               </li>
             </ul>
@@ -262,9 +283,7 @@
                       href="app-ecommerce-customer-details-billing.html"
                       class="menu-link"
                     >
-                      <div data-i18n="Address &amp; Billing">
-                        Address &amp; Billing
-                      </div>
+                      <div data-i18n="Address & Billing">Address & Billing</div>
                     </a>
                   </li>
                   <li class="menu-item">
@@ -320,9 +339,7 @@
                   href="app-ecommerce-settings-shipping.html"
                   class="menu-link"
                 >
-                  <div data-i18n="Shipping &amp; delivery">
-                    Shipping &amp; delivery
-                  </div>
+                  <div data-i18n="Shipping & delivery">Shipping & delivery</div>
                 </a>
               </li>
               <li class="menu-item">
@@ -447,7 +464,7 @@
               </li>
               <li class="menu-item">
                 <a href="app-user-view-billing.html" class="menu-link">
-                  <div data-i18n="Billing &amp; Plans">Billing &amp; Plans</div>
+                  <div data-i18n="Billing & Plans">Billing & Plans</div>
                 </a>
               </li>
               <li class="menu-item">
@@ -467,7 +484,7 @@
       <li class="menu-item">
         <a href="javascript:void(0);" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-settings"></i>
-          <div data-i18n="Roles &amp; Permissions">Roles &amp; Permissions</div>
+          <div data-i18n="Roles & Permissions">Roles & Permissions</div>
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
@@ -535,7 +552,7 @@
               </li>
               <li class="menu-item">
                 <a href="pages-account-settings-billing.html" class="menu-link">
-                  <div data-i18n="Billing &amp; Plans">Billing &amp; Plans</div>
+                  <div data-i18n="Billing & Plans">Billing & Plans</div>
                 </a>
               </li>
               <li class="menu-item">
@@ -949,7 +966,7 @@
           </li>
           <li class="menu-item">
             <a href="ui-list-groups.html" class="menu-link">
-              <div data-i18n="List Groups">List Groups</div>
+              <div data-i18n="List Groups">List groups</div>
             </a>
           </li>
           <li class="menu-item">
@@ -969,7 +986,7 @@
           </li>
           <li class="menu-item">
             <a href="ui-pagination-breadcrumbs.html" class="menu-link">
-              <div data-i18n="Pagination &amp; Breadcrumbs">
+              <div data-i18n="Pagination & Breadcrumbs">
                 Pagination &amp; Breadcrumbs
               </div>
             </a>
@@ -986,7 +1003,7 @@
           </li>
           <li class="menu-item">
             <a href="ui-tabs-pills.html" class="menu-link">
-              <div data-i18n="Tabs &amp; Pills">Tabs &amp; Pills</div>
+              <div data-i18n="Tabs & Pills">Tabs &amp; Pills</div>
             </a>
           </li>
           <li class="menu-item">
@@ -996,9 +1013,7 @@
           </li>
           <li class="menu-item">
             <a href="ui-tooltips-popovers.html" class="menu-link">
-              <div data-i18n="Tooltips &amp; Popovers">
-                Tooltips &amp; Popovers
-              </div>
+              <div data-i18n="Tooltips & Popovers">Tooltips &amp; popovers</div>
             </a>
           </li>
           <li class="menu-item">
@@ -1028,7 +1043,7 @@
           </li>
           <li class="menu-item">
             <a href="extended-ui-drag-and-drop.html" class="menu-link">
-              <div data-i18n="Drag &amp; Drop">Drag &amp; Drop</div>
+              <div data-i18n="Drag & Drop">Drag &amp; Drop</div>
             </a>
           </li>
           <li class="menu-item">
@@ -1038,7 +1053,7 @@
           </li>
           <li class="menu-item">
             <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
-              <div data-i18n="Perfect Scrollbar">Perfect Scrollbar</div>
+              <div data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
             </a>
           </li>
           <li class="menu-item">
@@ -1157,7 +1172,7 @@
           </li>
           <li class="menu-item">
             <a href="forms-selects.html" class="menu-link">
-              <div data-i18n="Select &amp; Tags">Select &amp; Tags</div>
+              <div data-i18n="Select & Tags">Select &amp; Tags</div>
             </a>
           </li>
           <li class="menu-item">
@@ -1308,36 +1323,42 @@
           <div data-i18n="Documentation">Documentation</div>
         </a>
       </li>
-      <div class="ps__rail-x" style="left: 0px; bottom: 0px">
-        <div
-          class="ps__thumb-x"
-          tabindex="0"
-          style="left: 0px; width: 0px"
-        ></div>
-      </div>
-      <div class="ps__rail-y" style="top: 0px; height: 877px; right: 4px">
-        <div
-          class="ps__thumb-y"
-          tabindex="0"
-          style="top: 0px; height: 498px"
-        ></div>
-      </div>
     </ul>
   </aside>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const hoverNav = (type) => {
+      const htmlTag = document.querySelector("html");
+      if (type == 1) {
+        htmlTag.classList.add("layout-menu-hover");
+      } else {
+        htmlTag.classList.remove("layout-menu-hover");
+      }
+    };
+
+    const isLock = ref(false);
+
+    watch(() => {
+      isLock.value;
+      const htmlTag = document.querySelector("html");
+      if (isLock.value == false) {
+        htmlTag.classList.remove("layout-menu");
+        htmlTag.classList.add("layout-menu-collapsed");
+        htmlTag.classList.remove("layout-menu-hover");
+      } else {
+        htmlTag.classList.remove("layout-menu-collapsed");
+        htmlTag.classList.remove("layout-menu");
+      }
+    });
+
+    return { hoverNav, isLock };
   },
 });
 </script>
 
-<style>
-aside {
-  background-color: red !important;
-}
-</style>
+<style></style>
