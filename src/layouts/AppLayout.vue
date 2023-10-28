@@ -27,7 +27,7 @@
       <div class="layout-page">
         <!-- Navbar -->
 
-        <navbar />
+        <navbar :expanded="navExpanded" ref="navbar" />
 
         <!-- / Navbar -->
 
@@ -1258,13 +1258,15 @@ export default defineComponent({
       }
     };
 
+    const navbar = ref("");
+
     const navExpanded = ref("");
     const updateExpanded = (bool) => {
-      alert(bool);
       navExpanded.value = bool;
+      navbar.value.setExpanded();
     };
 
-    return { hoverNav, updateExpanded };
+    return { hoverNav, updateExpanded, navExpanded, navbar };
   },
 });
 </script>

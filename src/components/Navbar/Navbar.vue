@@ -84,53 +84,19 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+          <a
+            class="nav-link hide-arrow"
+            href="javascript:void(0);"
+            @click="toggleChangeTheme('dark-theme')"
+          >
+            <i class="ti ti-moon-filled rounded-circle ti-md"></i>
+          </a>
+        </li>
         <!--/ Language -->
 
         <!-- Style Switcher -->
-        <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-          <a
-            class="nav-link dropdown-toggle hide-arrow"
-            href="javascript:void(0);"
-            data-bs-toggle="dropdown"
-          >
-            <i class="ti ti-md"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-            <li>
-              <a
-                class="dropdown-item"
-                href="javascript:void(0);"
-                data-theme="light"
-              >
-                <span class="align-middle"
-                  ><i class="ti ti-sun me-2"></i>Light</span
-                >
-              </a>
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="javascript:void(0);"
-                data-theme="dark"
-              >
-                <span class="align-middle"
-                  ><i class="ti ti-moon me-2"></i>Dark</span
-                >
-              </a>
-            </li>
-            <li>
-              <a
-                class="dropdown-item"
-                href="javascript:void(0);"
-                data-theme="system"
-              >
-                <span class="align-middle"
-                  ><i class="ti ti-device-desktop me-2"></i>System</span
-                >
-              </a>
-            </li>
-          </ul>
-        </li>
+
         <!-- / Style Switcher-->
 
         <!-- Quick links  -->
@@ -699,10 +665,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch, watchEffect } from "vue";
 
 export default defineComponent({
-  setup() {
+  props: {
+    expanded: Boolean,
+  },
+  setup(props: Boolean) {
     const isExpanded = ref(false);
 
     const toggleExpend = () => {
@@ -720,9 +689,65 @@ export default defineComponent({
       }
     });
 
-    return { isExpanded, toggleExpend };
+    const setExpanded = () => {
+      isExpanded.value = false;
+    };
+
+    const appTheme = ref("");
+    const body = document.body;
+    const toggleChangeTheme = async (theme) => {
+      appTheme.value = theme;
+      localStorage.setItem("app-theme", theme);
+      body.classList.add("fade-effect", "fade-out");
+      if (theme == "dark-theme") {
+        addDarkTheme();
+      } else {
+        removeDarkTheme();
+      }
+
+      setTimeout(() => {
+        if (theme === "dark-theme") {
+          addDarkTheme();
+        } else {
+          removeDarkTheme();
+        }
+
+        setTimeout(() => {
+          body.classList.remove("fade-out");
+        }, 300);
+      }, 10);
+    };
+
+    const darkCss = new URL(
+      "/src/assets/vendor/css/rtl/core-dark.css",
+      import.meta.url
+    );
+
+    let styleTag = null;
+    const addDarkTheme = () => {
+      const linkTag = document.createElement("link");
+      linkTag.id = "dark-mode";
+      linkTag.rel = "stylesheet";
+      linkTag.href = `${darkCss}`;
+
+      document.head.appendChild(linkTag);
+    };
+
+    const removeDarkTheme = () => {
+      const linkTag = document.getElementById("dark-mode");
+      if (linkTag) {
+        document.head.removeChild(linkTag);
+      }
+    };
+
+    return { isExpanded, toggleExpend, setExpanded, toggleChangeTheme };
   },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.bg-navbar-theme {
+  background-color: #2f3249 !important;
+  color: #c8cce5 !important;
+}
+</style>

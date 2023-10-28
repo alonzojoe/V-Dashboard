@@ -82,7 +82,7 @@
           </div>
         </div>
         <i
-          @click="hideExpanded"
+          @click="$emit('close-expanded', false), hideExpanded()"
           class="ti ti-x d-block d-xl-none ti-sm align-middle btn-x"
         ></i>
       </a>
@@ -1338,7 +1338,7 @@
 import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
-  setup({ emit }) {
+  setup() {
     const hoverNav = (type) => {
       const htmlTag = document.querySelector("html");
       if (type == 1) {
@@ -1366,7 +1366,6 @@ export default defineComponent({
     const hideExpanded = () => {
       const htmlTag = document.querySelector("html");
       htmlTag.classList.remove("layout-menu-expanded");
-      emit("close-expanded", false);
     };
 
     return { hoverNav, isLock, hideExpanded };
