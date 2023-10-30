@@ -20,7 +20,7 @@
       id="navbar-collapse"
     >
       <!-- Search -->
-      <div class="navbar-nav align-items-center">
+      <!-- <div class="navbar-nav align-items-center">
         <div class="nav-item navbar-search-wrapper mb-0">
           <a
             class="nav-item nav-link search-toggler d-flex align-items-center px-0"
@@ -32,7 +32,7 @@
             >
           </a>
         </div>
-      </div>
+      </div> -->
       <!-- /Search -->
 
       <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -705,17 +705,17 @@ export default defineComponent({
         removeDarkTheme();
       }
 
-      setTimeout(() => {
-        if (theme === "dark-theme") {
-          addDarkTheme();
-        } else {
-          removeDarkTheme();
-        }
+      // setTimeout(() => {
+      //   if (theme === "dark-theme") {
+      //     addDarkTheme();
+      //   } else {
+      //     removeDarkTheme();
+      //   }
 
-        setTimeout(() => {
-          body.classList.remove("fade-out");
-        }, 300);
-      }, 10);
+      //   setTimeout(() => {
+      //     body.classList.remove("fade-out");
+      //   }, 300);
+      // }, 10);
     };
 
     const darkCss = new URL(
@@ -746,8 +746,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.bg-navbar-theme {
+/*.bg-navbar-theme {
   background-color: #2f3249 !important;
   color: #c8cce5 !important;
-}
+}*/
 </style>

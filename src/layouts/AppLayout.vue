@@ -1239,7 +1239,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import Navbar from "@/components/Navbar/Navbar.vue";
 import Sidebar from "@/components/Sidebar/Sidebar.vue";
 
@@ -1265,6 +1265,24 @@ export default defineComponent({
       navExpanded.value = bool;
       navbar.value.setExpanded();
     };
+
+    const darkCss = new URL(
+      "/src/assets/vendor/css/rtl/core-dark.css",
+      import.meta.url
+    );
+
+    const addDarkTheme = () => {
+      const linkTag = document.createElement("link");
+      linkTag.id = "dark-mode";
+      linkTag.rel = "stylesheet";
+      linkTag.href = `${darkCss}`;
+
+      document.head.appendChild(linkTag);
+    };
+
+    onMounted(() => {
+      addDarkTheme();
+    });
 
     return { hoverNav, updateExpanded, navExpanded, navbar };
   },

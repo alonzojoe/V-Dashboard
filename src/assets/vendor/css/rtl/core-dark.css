@@ -26896,3 +26896,15 @@ a.bg-vimeo:focus {
 .footer.bg-lighter hr {
   border-color: rgba(207, 211, 236, 0.15);
 }
+
+.layout-page nav {
+  background: #2f3249 !important;
+}
+
+.navbar-nav li a i {
+  color: #cbcfe8 !important;
+}
+
+.navbar-nav a i {
+  color: #cbcfe8 !important;
+}

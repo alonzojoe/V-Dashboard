@@ -17,6 +17,7 @@ import '@/assets/vendor/css/rtl/theme-semi-dark.css'
 import '@/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css'
 //pages
 import '@/assets/vendor/css/pages/cards-advance.css'
+import '@/assets/vendor/css/rtl/custom-style.css'
 //js
 // import '@/assets/vendor/libs/jquery/jquery.js'
 import '@/assets/vendor/libs/popper/popper.js'
