@@ -1266,24 +1266,6 @@ export default defineComponent({
       navbar.value.setExpanded();
     };
 
-    const darkCss = new URL(
-      "/src/assets/vendor/css/rtl/core-dark.css",
-      import.meta.url
-    );
-
-    const addDarkTheme = () => {
-      const linkTag = document.createElement("link");
-      linkTag.id = "dark-mode";
-      linkTag.rel = "stylesheet";
-      linkTag.href = `${darkCss}`;
-
-      document.head.appendChild(linkTag);
-    };
-
-    onMounted(() => {
-      addDarkTheme();
-    });
-
     return { hoverNav, updateExpanded, navExpanded, navbar };
   },
 });
