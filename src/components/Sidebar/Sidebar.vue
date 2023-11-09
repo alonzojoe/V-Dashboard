@@ -1,52 +1,24 @@
 <template>
-  <aside
-    id="layout-menu"
-    class="layout-menu menu-vertical bg-menu-theme"
-    style="
+  <aside id="layout-menu" class="layout-menu menu-vertical bg-menu-theme" style="
       touch-action: none;
       user-select: none;
       -webkit-user-drag: none;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    "
-    @mouseover="hoverNav(1)"
-    @mouseout="hoverNav(2)"
-  >
+    " @mouseover="hoverNav(1)" @mouseout="hoverNav(2)">
     <div class="app-brand demo py-3 d-flex align-items-center">
       <a href="index.html" class="app-brand-link">
         <span class="app-brand-logo demo">
-          <svg
-            width="32"
-            height="22"
-            viewBox="0 0 32 22"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+          <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
               d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-              fill="#7367F0"
-            ></path>
-            <path
-              opacity="0.06"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
-              fill="#161616"
-            ></path>
-            <path
-              opacity="0.06"
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
-              fill="#161616"
-            ></path>
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fill="#7367F0"></path>
+            <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z" fill="#161616"></path>
+            <path opacity="0.06" fill-rule="evenodd" clip-rule="evenodd"
+              d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z" fill="#161616"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
               d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-              fill="#7367F0"
-            ></path>
+              fill="#7367F0"></path>
           </svg>
         </span>
         <span class="app-brand-text demo menu-text fw-bold">V-Dash</span>
@@ -61,18 +33,11 @@
             ></i>
             <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
           </a> -->
-      <a
-        href="javascript:void(0);"
-        class="layout-menu-toggle menu-link text-large ms-auto mb-2"
-      >
+      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto mb-2">
         <div class="demo-vertical-spacing btn-switch">
           <div class="has-error">
             <label class="switch">
-              <input
-                type="checkbox"
-                class="switch-input switch-input"
-                v-model="isLock"
-              />
+              <input type="checkbox" class="switch-input switch-input" v-model="isLock" />
               <span class="switch-toggle-slider">
                 <span class="switch-on"></span>
                 <span class="switch-off"></span>
@@ -81,10 +46,8 @@
             </label>
           </div>
         </div>
-        <i
-          @click="$emit('close-expanded', false), hideExpanded()"
-          class="ti ti-x d-block d-xl-none ti-sm align-middle btn-x"
-        ></i>
+        <i @click="$emit('close-expanded', false), hideExpanded()"
+          class="ti ti-x d-block d-xl-none ti-sm align-middle btn-x"></i>
       </a>
     </div>
 
@@ -92,8 +55,9 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      <li class="menu-item active open">
-        <a href="javascript:void(0);" class="menu-link menu-toggle">
+      {{ isToggled }}
+      <li class="menu-item" :class="{ 'active open': isToggled }">
+        <a href="javascript:void(0);" @click="toggleDropDown()" class="menu-link menu-toggle">
           <i class="menu-icon tf-icons ti ti-smart-home"></i>
           <div data-i18n="Dashboards">Dashboards</div>
           <div class="badge bg-primary rounded-pill ms-auto">3</div>
@@ -136,19 +100,12 @@
             </a>
           </li>
           <li class="menu-item">
-            <a
-              href="layouts-content-navbar-with-sidebar.html"
-              class="menu-link"
-            >
+            <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
               <div data-i18n="Content nav + Sidebar">Content nav + Sidebar</div>
             </a>
           </li>
           <li class="menu-item">
-            <a
-              href="../horizontal-menu-template"
-              class="menu-link"
-              target="_blank"
-            >
+            <a href="../horizontal-menu-template" class="menu-link" target="_blank">
               <div data-i18n="Horizontal">Horizontal</div>
             </a>
           </li>
@@ -270,34 +227,22 @@
                 </a>
                 <ul class="menu-sub">
                   <li class="menu-item">
-                    <a
-                      href="app-ecommerce-customer-details-overview.html"
-                      class="menu-link"
-                    >
+                    <a href="app-ecommerce-customer-details-overview.html" class="menu-link">
                       <div data-i18n="Overview">Overview</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a
-                      href="app-ecommerce-customer-details-security.html"
-                      class="menu-link"
-                    >
+                    <a href="app-ecommerce-customer-details-security.html" class="menu-link">
                       <div data-i18n="Security">Security</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a
-                      href="app-ecommerce-customer-details-billing.html"
-                      class="menu-link"
-                    >
+                    <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
                       <div data-i18n="Address & Billing">Address & Billing</div>
                     </a>
                   </li>
                   <li class="menu-item">
-                    <a
-                      href="app-ecommerce-customer-details-notifications.html"
-                      class="menu-link"
-                    >
+                    <a href="app-ecommerce-customer-details-notifications.html" class="menu-link">
                       <div data-i18n="Notifications">Notifications</div>
                     </a>
                   </li>
@@ -326,42 +271,27 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="app-ecommerce-settings-payments.html"
-                  class="menu-link"
-                >
+                <a href="app-ecommerce-settings-payments.html" class="menu-link">
                   <div data-i18n="Payments">Payments</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="app-ecommerce-settings-checkout.html"
-                  class="menu-link"
-                >
+                <a href="app-ecommerce-settings-checkout.html" class="menu-link">
                   <div data-i18n="Checkout">Checkout</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="app-ecommerce-settings-shipping.html"
-                  class="menu-link"
-                >
+                <a href="app-ecommerce-settings-shipping.html" class="menu-link">
                   <div data-i18n="Shipping & delivery">Shipping & delivery</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="app-ecommerce-settings-locations.html"
-                  class="menu-link"
-                >
+                <a href="app-ecommerce-settings-locations.html" class="menu-link">
                   <div data-i18n="Locations">Locations</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="app-ecommerce-settings-notifications.html"
-                  class="menu-link"
-                >
+                <a href="app-ecommerce-settings-notifications.html" class="menu-link">
                   <div data-i18n="Notifications">Notifications</div>
                 </a>
               </li>
@@ -550,10 +480,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="pages-account-settings-security.html"
-                  class="menu-link"
-                >
+                <a href="pages-account-settings-security.html" class="menu-link">
                   <div data-i18n="Security">Security</div>
                 </a>
               </li>
@@ -563,18 +490,12 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="pages-account-settings-notifications.html"
-                  class="menu-link"
-                >
+                <a href="pages-account-settings-notifications.html" class="menu-link">
                   <div data-i18n="Notifications">Notifications</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="pages-account-settings-connections.html"
-                  class="menu-link"
-                >
+                <a href="pages-account-settings-connections.html" class="menu-link">
                   <div data-i18n="Connections">Connections</div>
                 </a>
               </li>
@@ -596,38 +517,22 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="pages-misc-error.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="pages-misc-error.html" class="menu-link" target="_blank">
                   <div data-i18n="Error">Error</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="pages-misc-under-maintenance.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="pages-misc-under-maintenance.html" class="menu-link" target="_blank">
                   <div data-i18n="Under Maintenance">Under Maintenance</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="pages-misc-comingsoon.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="pages-misc-comingsoon.html" class="menu-link" target="_blank">
                   <div data-i18n="Coming Soon">Coming Soon</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="pages-misc-not-authorized.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="pages-misc-not-authorized.html" class="menu-link" target="_blank">
                   <div data-i18n="Not Authorized">Not Authorized</div>
                 </a>
               </li>
@@ -642,47 +547,27 @@
         </a>
         <ul class="menu-sub">
           <li class="menu-item">
-            <a
-              href="../front-pages/landing-page.html"
-              class="menu-link"
-              target="_blank"
-            >
+            <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
               <div data-i18n="Landing">Landing</div>
             </a>
           </li>
           <li class="menu-item">
-            <a
-              href="../front-pages/pricing-page.html"
-              class="menu-link"
-              target="_blank"
-            >
+            <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
               <div data-i18n="Pricing">Pricing</div>
             </a>
           </li>
           <li class="menu-item">
-            <a
-              href="../front-pages/payment-page.html"
-              class="menu-link"
-              target="_blank"
-            >
+            <a href="../front-pages/payment-page.html" class="menu-link" target="_blank">
               <div data-i18n="Payment">Payment</div>
             </a>
           </li>
           <li class="menu-item">
-            <a
-              href="../front-pages/checkout-page.html"
-              class="menu-link"
-              target="_blank"
-            >
+            <a href="../front-pages/checkout-page.html" class="menu-link" target="_blank">
               <div data-i18n="Checkout">Checkout</div>
             </a>
           </li>
           <li class="menu-item">
-            <a
-              href="../front-pages/help-center-landing.html"
-              class="menu-link"
-              target="_blank"
-            >
+            <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
               <div data-i18n="Help Center">Help Center</div>
             </a>
           </li>
@@ -700,20 +585,12 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="auth-login-basic.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-login-basic.html" class="menu-link" target="_blank">
                   <div data-i18n="Basic">Basic</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-login-cover.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-login-cover.html" class="menu-link" target="_blank">
                   <div data-i18n="Cover">Cover</div>
                 </a>
               </li>
@@ -725,29 +602,17 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="auth-register-basic.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-register-basic.html" class="menu-link" target="_blank">
                   <div data-i18n="Basic">Basic</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-register-cover.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-register-cover.html" class="menu-link" target="_blank">
                   <div data-i18n="Cover">Cover</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-register-multisteps.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-register-multisteps.html" class="menu-link" target="_blank">
                   <div data-i18n="Multi-steps">Multi-steps</div>
                 </a>
               </li>
@@ -759,20 +624,12 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="auth-verify-email-basic.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-verify-email-basic.html" class="menu-link" target="_blank">
                   <div data-i18n="Basic">Basic</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-verify-email-cover.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-verify-email-cover.html" class="menu-link" target="_blank">
                   <div data-i18n="Cover">Cover</div>
                 </a>
               </li>
@@ -784,20 +641,12 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="auth-reset-password-basic.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-reset-password-basic.html" class="menu-link" target="_blank">
                   <div data-i18n="Basic">Basic</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-reset-password-cover.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-reset-password-cover.html" class="menu-link" target="_blank">
                   <div data-i18n="Cover">Cover</div>
                 </a>
               </li>
@@ -809,20 +658,12 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="auth-forgot-password-basic.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
                   <div data-i18n="Basic">Basic</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-forgot-password-cover.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-forgot-password-cover.html" class="menu-link" target="_blank">
                   <div data-i18n="Cover">Cover</div>
                 </a>
               </li>
@@ -834,20 +675,12 @@
             </a>
             <ul class="menu-sub">
               <li class="menu-item">
-                <a
-                  href="auth-two-steps-basic.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-two-steps-basic.html" class="menu-link" target="_blank">
                   <div data-i18n="Basic">Basic</div>
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="auth-two-steps-cover.html"
-                  class="menu-link"
-                  target="_blank"
-                >
+                <a href="auth-two-steps-cover.html" class="menu-link" target="_blank">
                   <div data-i18n="Cover">Cover</div>
                 </a>
               </li>
@@ -1089,10 +922,7 @@
                 </a>
               </li>
               <li class="menu-item">
-                <a
-                  href="extended-ui-timeline-fullscreen.html"
-                  class="menu-link"
-                >
+                <a href="extended-ui-timeline-fullscreen.html" class="menu-link">
                   <div data-i18n="Fullscreen">Fullscreen</div>
                 </a>
               </li>
@@ -1311,21 +1141,13 @@
         <span class="menu-header-text">Misc</span>
       </li>
       <li class="menu-item">
-        <a
-          href="https://pixinvent.ticksy.com/"
-          target="_blank"
-          class="menu-link"
-        >
+        <a href="https://pixinvent.ticksy.com/" target="_blank" class="menu-link">
           <i class="menu-icon tf-icons ti ti-lifebuoy"></i>
           <div data-i18n="Support">Support</div>
         </a>
       </li>
       <li class="menu-item">
-        <a
-          href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/"
-          target="_blank"
-          class="menu-link"
-        >
+        <a href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/" target="_blank" class="menu-link">
           <i class="menu-icon tf-icons ti ti-file-description"></i>
           <div data-i18n="Documentation">Documentation</div>
         </a>
@@ -1368,7 +1190,21 @@ export default defineComponent({
       htmlTag.classList.remove("layout-menu-expanded");
     };
 
-    return { hoverNav, isLock, hideExpanded };
+    const isToggled = ref(false)
+    const toggleDropDown = () => {
+      isToggled.value = !isToggled.value
+
+    }
+
+    const menuItems = [
+      {
+        id: 1, label: 'Dashboard', subMenu: [
+          { label: 'Analytics', route: '' },
+        ], route: '', isToggled: ref(false),
+      },
+    ]
+
+    return { hoverNav, isLock, hideExpanded, toggleDropDown, isToggled };
   },
 });
 </script>
