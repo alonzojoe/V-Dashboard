@@ -63,7 +63,7 @@
 import { defineComponent, ref, onMounted } from "vue";
 import Navbar from "@/components/Navbar/Navbar.vue";
 import Sidebar from "@/components/Sidebar/Sidebar.vue";
-import Footer from "@/components/Footer/Footer.vue";
+import Footer from "@/components/Footer/Footer.vue"
 
 export default defineComponent({
   components: {

@@ -1,6 +1,107 @@
 <template>
   <div class="row">
     <!-- Website Analytics -->
+    <div class="col-lg-12 mb-4">
+      <titled-card>
+        <div class="row row-bordered g-0">
+          <div class="col-xl-12 p-4">
+            <div class="text-light small fw-medium">Default</div>
+            <div class="demo-inline-spacing">
+              <label class="switch switch-primary">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Primary</span>
+              </label>
+
+              <label class="switch switch-secondary">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Secondary</span>
+              </label>
+
+              <label class="switch switch-success">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Success</span>
+              </label>
+
+              <label class="switch switch-danger">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Danger</span>
+              </label>
+
+              <label class="switch switch-warning">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Warning</span>
+              </label>
+
+              <label class="switch switch-info">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Info</span>
+              </label>
+
+              <label class="switch switch-dark">
+                <input type="checkbox" class="switch-input" checked />
+                <span class="switch-toggle-slider">
+                  <span class="switch-on">
+                    <i class="ti ti-check"></i>
+                  </span>
+                  <span class="switch-off">
+                    <i class="ti ti-x"></i>
+                  </span>
+                </span>
+                <span class="switch-label">Dark</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </titled-card>
+    </div>
     <div class="col-lg-6 mb-4">
       <div class="swiper-container swiper-container-horizontal swiper swiper-card-advance-bg"
         id="swiper-with-pagination-cards">
@@ -837,9 +938,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import TitledCard from "@/components/Cards/TitledCard.vue"
 
 export default defineComponent({
   name: 'Dashboard',
+  components: {
+    TitledCard
+  },
   setup() {
     return {};
   },
