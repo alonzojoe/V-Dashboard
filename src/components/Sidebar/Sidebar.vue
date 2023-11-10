@@ -1202,6 +1202,9 @@ export default defineComponent({
           { label: 'Analytics', route: '' },
         ], route: '', isToggled: ref(false),
       },
+        {
+        id: 2, label: 'Home', subMenu: [], route: 'home', isToggled: ref(false),
+      },
     ]
 
     return { hoverNav, isLock, hideExpanded, toggleDropDown, isToggled };
