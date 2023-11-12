@@ -56,7 +56,7 @@
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
       {{ menuItem }}
-      {{ route.name }} {{ menuItems[0].name }} {{ currentRoute === menuItems[0].name }}
+      {{ route.name }}
       <li v-for="(m, index) in menuItems" :key="index" class="menu-item"
         :class="{ 'active': route.name === m.name, 'open': m.isToggled }">
         <router-link :to="{ name: m.path }" @click="toggleDropDown(m.id)" class="menu-link"
@@ -149,7 +149,7 @@ export default defineComponent({
       },
     ])
 
-    const currentRoute = ref(route.value.name)
+    const currentRoute = ref(route.name)
 
 
     return { hoverNav, isLock, hideExpanded, toggleDropDown, isToggled, menuItems, currentRoute, route };
