@@ -56,13 +56,14 @@
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
       {{ menuItem }}
-
-      <li v-for="(m, index) in menuItems" :key="index" class="menu-item" :class="{ 'open': m.isToggled }">
-        <a href="javascript:void(0);" @click="toggleDropDown(m.id)" class="menu-link"
+      {{ route.name }} {{ menuItems[0].name }} {{ currentRoute === menuItems[0].name }}
+      <li v-for="(m, index) in menuItems" :key="index" class="menu-item"
+        :class="{ 'active': route.name === m.name, 'open': m.isToggled }">
+        <router-link :to="{ name: m.path }" @click="toggleDropDown(m.id)" class="menu-link"
           :class="{ 'menu-toggle': m.subMenu.length }">
           <i class="menu-icon tf-icons ti" :class="m.icon"></i>
-          <div data-i18n="Dashboards">{{ m.label }}</div>
-        </a>
+          <div data-i18n="Dashboards">{{ m.label }} </div>
+        </router-link>
         <ul class="menu-sub" v-if="m.subMenu.length">
           <li v-for="(s, index) in m.subMenu" :key="index" class="menu-item">
             <a href="index.html" class="menu-link">
@@ -91,7 +92,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, watch, computed } from "vue";
+import { useRoute } from "vue-router";
 
 export default defineComponent({
   setup() {
@@ -105,6 +107,7 @@ export default defineComponent({
     };
 
     const isLock = ref(false);
+    const route = useRoute();
 
     watch(() => {
       isLock.value;
@@ -136,17 +139,20 @@ export default defineComponent({
 
     const menuItems = ref([
       {
-        id: 1, label: 'Dashboard', icon: 'ti-dashboard', route: '', subMenu: [
-          { label: 'Analytics', route: '', },
-          { label: 'eCommerce', route: '', },
+        id: 1, label: 'Dashboard', icon: 'ti-dashboard', name: 'dashboard', path: '', subMenu: [
+          { label: 'Analytics', path: '', },
+          { label: 'eCommerce', path: '', },
         ], isToggled: ref(false),
       },
       {
-        id: 2, label: 'Home', icon: 'ti-smart-home', route: 'home', subMenu: [], isToggled: ref(false),
+        id: 2, label: 'Home', icon: 'ti-smart-home', name: 'home', path: 'home', subMenu: [], isToggled: ref(false),
       },
     ])
 
-    return { hoverNav, isLock, hideExpanded, toggleDropDown, isToggled, menuItems };
+    const currentRoute = ref(route.value.name)
+
+
+    return { hoverNav, isLock, hideExpanded, toggleDropDown, isToggled, menuItems, currentRoute, route };
   },
 });
 </script>

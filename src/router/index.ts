@@ -17,6 +17,11 @@ const routes = [
                 name: 'dashboard',
                 component: () => import('@/pages/Dashboard/Dashboard.vue'),
             },
+            {
+                path: 'home',
+                name: 'home',
+                component: () => import('@/pages/Dashboard/Home.vue'),
+            },
 
         ]
     }
