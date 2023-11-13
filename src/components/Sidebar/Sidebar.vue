@@ -92,12 +92,6 @@
 
     <ul class="menu-inner py-1">
       <!-- Dashboards -->
-      {{
-        menuItem
-      }}
-      {{
-        route.name
-      }}
       <li
         v-for="(m, index) in menuItems"
         :key="index"
@@ -109,15 +103,15 @@
             m.subMenu.some((subItem) => subItem.name === route.name),
         }"
       >
-        <router-link
-          :to="{ name: m.name }"
-          @click="toggleDropDown(m.id)"
+        <a
+          href="javascript:void(0);"
+          @click="selectTab(m.id, m.subMenu, m.name)"
           class="menu-link"
           :class="{ 'menu-toggle': m.subMenu.length }"
         >
           <i class="menu-icon tf-icons ti" :class="m.icon"></i>
           <div data-i18n="Dashboards">{{ m.label }}</div>
-        </router-link>
+        </a>
         <ul class="menu-sub" v-if="m.subMenu.length">
           <li
             v-for="(s, index) in m.subMenu"
@@ -149,7 +143,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch, computed } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
@@ -164,6 +158,7 @@ export default defineComponent({
 
     const isLock = ref(false);
     const route = useRoute();
+    const router = useRouter();
 
     watch(() => {
       isLock.value;
@@ -184,11 +179,29 @@ export default defineComponent({
     };
 
     const isToggled = ref(false);
-    const toggleDropDown = (itemId: Number) => {
-      isToggled.value = !isToggled.value;
-      const item = menuItems.value.find((menuItem) => menuItem.id === itemId);
-      if (item) {
-        item.isToggled = !item.isToggled;
+    const toggleDropDown = (itemId: Number, hasSubmenu) => {
+      if (!hasSubmenu.length) {
+        menuItems.value.forEach((m) => {
+          m.isToggled = false;
+        });
+      } else {
+        isToggled.value = !isToggled.value;
+        const item = menuItems.value.find((menuItem) => menuItem.id === itemId);
+        if (item) {
+          item.isToggled = !item.isToggled;
+        }
+      }
+    };
+
+    const selectTab = (itemId: Number, hasSubmenu, routerName) => {
+      toggleDropDown(itemId, hasSubmenu);
+      visitTab(itemId, hasSubmenu, routerName);
+    };
+
+    const visitTab = (itemId, hasSubmenu, routerName) => {
+      console.log(!hasSubmenu.length, routerName);
+      if (!hasSubmenu.length) {
+        router.push({ name: routerName });
       }
     };
 
@@ -202,7 +215,7 @@ export default defineComponent({
           { label: "Analytics", name: "dashboard" },
           { label: "eCommerce", name: "ecommerce" },
         ],
-        isToggled: ref(false),
+        isToggled: false,
       },
       {
         id: 2,
@@ -210,7 +223,7 @@ export default defineComponent({
         icon: "ti-smart-home",
         name: "home",
         subMenu: [],
-        isToggled: ref(false),
+        isToggled: false,
       },
       // {
       //   id: 3,
@@ -230,7 +243,7 @@ export default defineComponent({
       isLock,
       hideExpanded,
       toggleDropDown,
-      isToggled,
+      selectTab,
       menuItems,
       currentRoute,
       route,
